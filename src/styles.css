@@ -1,0 +1,10 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.myLabelComponentInSvg {
+  height: 70px;
+  width: 180px;
+  margin: 10px;
+}
