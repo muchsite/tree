@@ -50,7 +50,7 @@ const containerStyles = {
 
 const App = () => {
   const [treeData, setTreeData] = useState(initialTreeData);
-
+  const [v, setV] = useState("step");
   const findNode = (node, nodeId) => {
     if (node.id === nodeId) {
       return node;
@@ -130,25 +130,37 @@ const App = () => {
   );
 
   return (
-    <div style={containerStyles}>
-      <Tree
-        data={treeData}
-        orientation="vertical"
-        translate={{ x: 400, y: 200 }}
-        onNodeClick={handleNodeClick}
-        rootNodeClassName="node__root"
-        branchNodeClassName="node__branch"
-        leafNodeClassName="node__leaf"
-        svgClassName=""
-        pathFunc="step"
-        renderCustomNodeElement={(rd3tProps) =>
-          renderForeignObjectNode({
-            ...rd3tProps,
-            foreignObjectProps,
-          })
-        }
-        separation={{ siblings: 3, nonSiblings: 2.5 }}
-      />
+    <div>
+      <select
+        name="cars"
+        id="cars"
+        onChange={(e) => setV(e.currentTarget.value)}
+      >
+        <option value="step">step</option>
+        <option value="diagonal">diagonal</option>
+        <option value="elbow">elbow</option>
+        <option value="straight">straight</option>
+      </select>
+      <div style={containerStyles}>
+        <Tree
+          data={treeData}
+          orientation="vertical"
+          translate={{ x: 400, y: 200 }}
+          onNodeClick={handleNodeClick}
+          rootNodeClassName="node__root"
+          branchNodeClassName="node__branch"
+          leafNodeClassName="node__leaf"
+          svgClassName=""
+          pathFunc={v}
+          renderCustomNodeElement={(rd3tProps) =>
+            renderForeignObjectNode({
+              ...rd3tProps,
+              foreignObjectProps,
+            })
+          }
+          separation={{ siblings: 3, nonSiblings: 2.5 }}
+        />
+      </div>
     </div>
   );
 };
